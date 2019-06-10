@@ -7,6 +7,11 @@
 
 <p>
   <strong>Content:</strong>
+  <% if @post.images.attached? %>
+    <% @post.images.each do |image| %>
+      <%= image_tag image %> <br>
+    <% end %>
+  <% end %>
   <%= @post.content %>
 </p>
 
