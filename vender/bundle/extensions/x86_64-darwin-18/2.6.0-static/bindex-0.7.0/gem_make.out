@@ -1,0 +1,15 @@
+current directory: /Users/rayna/Desktop/scenery-bbs/vender/bundle/gems/bindex-0.7.0/ext/skiptrace
+/Users/rayna/.rbenv/versions/2.6.3/bin/ruby -I /Users/rayna/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20190610-44662-1mwcbzl.rb extconf.rb
+creating Makefile
+
+current directory: /Users/rayna/Desktop/scenery-bbs/vender/bundle/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /Users/rayna/Desktop/scenery-bbs/vender/bundle/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/cruby.bundle
+
+current directory: /Users/rayna/Desktop/scenery-bbs/vender/bundle/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20190610-44662-1jfnhxd/skiptrace
