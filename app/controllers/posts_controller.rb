@@ -68,6 +68,10 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    def set_place
+      @places = Place.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title, :content, :auther, :place, images:[])
