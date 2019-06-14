@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>place</th>
       <th>Title</th>
       <th>image</th>
       <th>Content</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
+        <td><%= post.place %></td>
         <td><%= post.title %></td>
         <td>
           <% if post.images.attached? %>
