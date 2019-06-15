@@ -21,10 +21,8 @@
         <td><%= post.title %></td>
         <td>
           <% if post.images.attached? %>
-           <% post.images.each do |image| %>
-           <%= image_tag image, :size => '500x420'%> <br>
+           <%= image_tag post.images.first, :size => '500x420'%> <br>
           <% end %>
-        <% end %>
         </td>
         <td><%= sanitize post.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></td>
         <td><%= post.auther %></td>
