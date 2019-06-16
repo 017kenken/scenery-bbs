@@ -11,11 +11,16 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    if current_user
+      @comment = Comment.new
+      @comment.auther = current_user.name
+    end
   end
 
   # GET /posts/new
   def new
     @post = Post.new
+    @post.auther = current_user.name
   end
 
   # GET /posts/1/edit
@@ -26,6 +31,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
 
     respond_to do |format|
       if @post.save
