@@ -10,17 +10,33 @@
   <%= @post.title %>
 </p>
 
-<p>
-  <strong>Content:</strong>
-  <% if @post.images.attached? %>
-    <% @post.images.each do |image| %>
-      <%= image_tag image, :size => '500x420'%> <br>
+<p><strong>Content:</strong></p>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <!-- スライドさせる画像の設定 -->
+  <div class="carousel-inner">
+   <% if @post.images.attached? %>
+    <div class="carousel-item active">
+        <%= image_tag @post.images.first, :class =>"d-block w-100", :size => "500x420"%>
+    </div><!-- /.carousel-item -->
+    <% @post.images.slice(1..-1).each do |image| %>
+      <div class="carousel-item">
+          <%= image_tag image, :class => "d-block w-100", :size => '500x420'%>
+      </div>
     <% end %>
-  <% end %>
-  <%= sanitize @post.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %>
-</p>
+   <% end %>
+  </div><!-- /.carousel-inner -->
+  <!-- スライドコントロールの設定 -->
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">前へ</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">次へ</span>
+  </a>
+</div><!-- /.carousel -->
+<p><%= sanitize @post.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></p>
 
-<p>
   <strong>Auther:</strong>
   <%= @post.auther %>
 </p>
