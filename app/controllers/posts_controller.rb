@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true)
   end
 
   # GET /posts/1
@@ -13,14 +14,14 @@ class PostsController < ApplicationController
   def show
     if current_user
       @comment = Comment.new
-      @comment.auther = current_user.name
+      #@comment.auther = current_user.name
     end
   end
 
   # GET /posts/new
   def new
     @post = Post.new
-    @post.auther = current_user.name
+    #@post.auther = current_user.name
   end
 
   # GET /posts/1/edit
