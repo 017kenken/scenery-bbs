@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'user/:id', to:'user#show'
+  get 'user/:id', to:'user#show', as: 'users'
   patch 'user', to:'user#update'
   get 'users/edit', to:'user#edit'
   get 'mypage' , to: 'user#mypage'
