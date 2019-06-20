@@ -1,5 +1,38 @@
-<h1>njlsdncvjlk</h1>
+<h1><%= @user.name%></h1>
 
 <p>
-<%= @user.name%>
+<%=@user.profile%>
 </p>
+<table>
+  <thead>
+    <tr>
+      <th>place</th>
+      <th>Title</th>
+      <th>image</th>
+      <th>Content</th>
+      <th>Auther</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.place %></td>
+        <td><%= post.title %></td>
+        <td>
+          <% if post.images.attached? %>
+           <%= image_tag post.images.first, :size => '500x420'%> <br>
+          <% end %>
+        </td>
+        <td><%= sanitize post.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></td>
+        <td><%= post.auther %></td>
+        <td><%= link_to 'Show', post %></td>
+        <% if user_signed_in? && post.user_id == current_user.id %>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
