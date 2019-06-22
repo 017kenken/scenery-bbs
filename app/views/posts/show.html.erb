@@ -41,12 +41,36 @@
   <%= @post.auther %>
 </p>
 
-<h2>Comments</h2>
-  <div id="comments">
-    <%= render @post.comments %>
+<p><%=@post.likers(User).count%></p>
+
+<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    comment
+</button>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+        <h2>Comments</h2>
+      <div id="comments">
+        <%= render @post.comments %>
+      </div>
+
+    <%= render 'comments/new', post: @post %> 
   </div>
+</div>
 
-<%= render 'comments/new', post: @post %> 
-
+<br>
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+
+<div>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseyoki" aria-expanded="false" aria-controls="collapseyoki">
+        よき！一覧
+      </button>
+    </p>
+    <div class="collapse" id="collapseyoki">
+      <div class="card card-body">
+        <% @likers.each_with_index do |liker| %>
+      <p><%= link_to liker.name, users_path(liker.id) %></p>
+    <% end %>
+      </div>
+    </div>
+</div>

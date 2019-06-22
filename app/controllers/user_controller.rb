@@ -1,7 +1,7 @@
 class UserController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @posts = current_user.posts.where(params[:user_id])
+    @posts = @user.posts.where(params[:user_id])
   end
 
   def update

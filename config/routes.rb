@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   patch 'user', to:'user#update'
   get 'users/edit', to:'user#edit'
   get 'mypage' , to: 'user#mypage'
+
+  get 'post/:id/likes', to: 'posts#likes', as: :likes
+  
   devise_for :users
   resources :places
   root 'posts#index'

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :likes]
   before_action :set_place, only: [:new, :edit]
+  
 
   # GET /posts
   # GET /posts.json
@@ -12,6 +13,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @likers = @post.likers(User)
     if current_user
       @comment = Comment.new
       @comment.auther = current_user.name
@@ -66,6 +68,16 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def likes
+    @user = current_user  
+    @user.toggle_like!(@post)
+    if @user.likes?(@post)
+        redirect_back(fallback_location: root_path, notice: "よき！しました")
+    else
+      redirect_back(fallback_location: root_path, notice: "よき！を解除しました")
     end
   end
 
