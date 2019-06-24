@@ -1,6 +1,8 @@
+<p id="notice"><%= notice %></p>
 <h1><%=@user.name%></h1>
 <div><%= link_to 'フォロー', followees_path(@user)%><%=@followees.count%> <%= link_to 'フォロワー', followers_path(@user) %><%=@followers.count%></div>
 <p><%= sanitize @user.profile, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></p>
+<%= link_to 'edit', users_edit_path%>
  <!--投稿一覧-->
 <table>
   <thead>
@@ -27,6 +29,13 @@
         <td><%= sanitize post.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></td>
         <td><%= post.auther %></td>
         <td><%= link_to 'Show', post %></td>
+        <td>
+        <% if current_user.likes?(post)%>
+        <%= link_to 'nolike', likes_path(post) %>
+        <% else %>
+        <%= link_to 'like', likes_path(post) %>
+        <% end %>
+        </td>
         <% if user_signed_in? && post.user_id == current_user.id %>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -35,9 +44,6 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to 'edit', users_edit_path%>
-<!--<%= link_to 'show', users_path(@user)%>-->
 
 <table>
   <thead>
@@ -63,7 +69,14 @@
         </td>
         <td><%= sanitize like.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></td>
         <td><%= like.auther %></td>
-        <td><%= link_to 'Show', like %></td>
+        <td><%= link_to 'Show', like %></td><td>
+        <% if current_user.likes?(like)%>
+        <%= link_to 'nolike', likes_path(like) %>
+        <% else %>
+        <%= link_to 'like', likes_path(like) %>
+        <% end %>
+        </td>
+
         <% if user_signed_in? && like.user_id == current_user.id %>
         <td><%= link_to 'Edit', edit_post_path(like) %></td>
         <td><%= link_to 'Destroy', like, method: :delete, data: { confirm: 'Are you sure?' } %></td>

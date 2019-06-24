@@ -41,7 +41,13 @@
   <%= @post.auther %>
 </p>
 
-<p><%=@post.likers(User).count%></p>
+<p>
+<% if current_user.likes?(@post)%>
+<%= link_to 'nolike', likes_path(@post) %><%=@post.likers(User).count%>
+<% else %>
+<%= link_to 'like', likes_path(@post) %><%=@post.likers(User).count%>
+<% end %>
+</p>
 
 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     comment

@@ -34,7 +34,13 @@
         <td><%= sanitize post.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></td>
         <td><%= link_to post.auther, users_path(post.user_id) %></td>
         <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'like', likes_path(post) %></td>
+        <td>
+        <% if current_user.likes?(post)%>
+        <%= link_to 'nolike', likes_path(post) %>
+        <% else %>
+        <%= link_to 'like', likes_path(post) %>
+        <% end %>
+        </td>
         <% if user_signed_in? && post.user_id == current_user.id %>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
