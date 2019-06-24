@@ -1,4 +1,5 @@
 <h1><%=@user.name%></h1>
+<div><%= link_to 'フォロー', followees_path(@user)%><%=@followees.count%> <%= link_to 'フォロワー', followers_path(@user) %><%=@followers.count%></div>
 <p><%= sanitize @user.profile, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></p>
  <!--投稿一覧-->
 <table>

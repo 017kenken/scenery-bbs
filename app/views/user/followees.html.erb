@@ -1,0 +1,6 @@
+<h1>フォロー</h1>
+<div>
+<% @followees.each do |followees| %>
+  <p><%= link_to followees.name, users_path(followees.id) %></p>
+<% end %>
+</div>
