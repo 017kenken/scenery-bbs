@@ -42,10 +42,12 @@
 </p>
 
 <p>
-<% if current_user.likes?(@post)%>
-<%= link_to 'nolike', likes_path(@post) %><%=@post.likers(User).count%>
-<% else %>
-<%= link_to 'like', likes_path(@post) %><%=@post.likers(User).count%>
+<% if user_signed_in? %>
+  <% if current_user.likes?(@post)%>
+  <%= link_to 'nolike', likes_path(@post) %><%=@post.likers(User).count%>
+  <% else %>
+  <%= link_to 'like', likes_path(@post) %><%=@post.likers(User).count%>
+  <% end %>
 <% end %>
 </p>
 
