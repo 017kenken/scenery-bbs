@@ -1,6 +1,30 @@
+<p id="notice"><%= notice %></p>
 <h1>フォロワー</h1>
+<hr>
 <div>
 <% @followers.each do |followers| %>
-  <p><%= link_to followers.name, users_path(followers.id) %></p>
+  <div class="follow_user">
+    <% if user_signed_in? && followers.id == current_user.id %>
+      <strong> <%= link_to followers.name, mypage_path %> </strong>
+    <% else %>
+      <strong> <%= link_to followers.name, users_path(followers.id) %> </strong>
+    <% end %>
+  </div>
+
+  <div class="follow">
+    <% if user_signed_in? && followers.id != current_user.id %>
+      <% if current_user.follows?(followers)%>
+        <%= link_to 'フォロー中', follow_user_path(followers.id), method: :post %>
+      <% else %>
+        <%= link_to 'フォローする', follow_user_path(followers.id), method: :post %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="profile">
+   <%= sanitize followers.profile, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %>
+  </div>
+  <hr>
+
 <% end %>
 </div>
