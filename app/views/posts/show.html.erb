@@ -1,16 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Category:</strong>
-  <%= @post.place %>
-</p>
+<div class="user_name"> <strong> <%= @post.auther %> </strong> </div>
+<div class="title"> <%= @post.title %> </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p><strong>Content:</strong></p>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <!-- スライドさせる画像の設定 -->
   <div class="carousel-inner">
@@ -35,21 +27,24 @@
     <span class="sr-only">次へ</span>
   </a>
 </div><!-- /.carousel -->
-<p><%= sanitize @post.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></p>
+<div class="content"><%= sanitize @post.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></div>
 
-  <strong>Auther:</strong>
-  <%= @post.auther %>
-</p>
+<div class="category"> カテゴリー：<%= @post.place %> </div>
 
-<p>
-<% if user_signed_in? %>
-  <% if current_user.likes?(@post)%>
-  <%= link_to 'nolike', likes_path(@post) %><%=@post.likers(User).count%>
-  <% else %>
-  <%= link_to 'like', likes_path(@post) %><%=@post.likers(User).count%>
-  <% end %>
-<% end %>
-</p>
+<div class="various">
+  <% if user_signed_in? %>
+    <% if current_user.likes?(@post)%>
+    <%= link_to '✨', likes_path(@post) %><%=@post.likers(User).count%>
+    <% else %>
+    <%= link_to '☆', likes_path(@post) %><%=@post.likers(User).count%>
+    <% end %>
+  <% end %> |
+  <% if user_signed_in? && @post.user_id == current_user.id %>
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+    <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %> |
+  <%= link_to 'Back', posts_path %>
+</div>
 
 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     comment
@@ -64,10 +59,6 @@
     <%= render 'comments/new', post: @post %> 
   </div>
 </div>
-
-<br>
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
 
 <div>
     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseyoki" aria-expanded="false" aria-controls="collapseyoki">
