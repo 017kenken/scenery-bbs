@@ -1,6 +1,6 @@
 class UserController < ApplicationController
   before_action :set_user, only: [:show, :follow, :followers, :followees]
-
+  before_action :authenticate_user!, only: [:follow]
   def show
     @posts = @user.posts.where(params[:user_id])
   end
