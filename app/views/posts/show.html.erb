@@ -46,9 +46,15 @@
   <%= link_to 'Back', posts_path %>
 </div>
 
+<p>
 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     comment
 </button>
+<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseyoki" aria-expanded="false" aria-controls="collapseyoki">
+        よき！一覧
+</button>
+</p>
+
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
         <h2>Comments</h2>
@@ -60,16 +66,10 @@
   </div>
 </div>
 
-<div>
-    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseyoki" aria-expanded="false" aria-controls="collapseyoki">
-        よき！一覧
-      </button>
-    </p>
-    <div class="collapse" id="collapseyoki">
-      <div class="card card-body">
-        <% @likers.each_with_index do |liker| %>
+<div class="collapse" id="collapseyoki">
+  <div class="card card-body">
+    <% @likers.each_with_index do |liker| %>
       <p><%= link_to liker.name, users_path(liker.id) %></p>
     <% end %>
-      </div>
-    </div>
+  </div>
 </div>
