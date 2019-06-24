@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<div class="user_name"> <strong> <%= @post.auther %> </strong> </div>
+<div class="user_name"> 
+  <% if user_signed_in? && @post.user_id == current_user.id %>
+    <strong> <%= link_to @post.auther, mypage_path %> </strong>
+  <% else %>
+    <strong> <%= link_to @post.auther, users_path(@post.user_id) %> </strong>
+  <% end %>
+</div>
 <div class="title"> <%= @post.title %> </div>
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -8,11 +14,11 @@
   <div class="carousel-inner">
    <% if @post.images.attached? %>
     <div class="carousel-item active">
-        <%= image_tag @post.images.first, :class =>"d-block w-100", :size => "500x420"%>
+        <%= image_tag @post.images.first, :class =>"d-block w-100"%>
     </div><!-- /.carousel-item -->
     <% @post.images.slice(1..-1).each do |image| %>
       <div class="carousel-item">
-          <%= image_tag image, :class => "d-block w-100", :size => '500x420'%>
+          <%= image_tag image, :class => "d-block w-100"%>
       </div>
     <% end %>
    <% end %>
@@ -57,7 +63,6 @@
 
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
-        <h2>Comments</h2>
       <div id="comments">
         <%= render @post.comments %>
       </div>

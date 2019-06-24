@@ -8,7 +8,13 @@
 <div>
     <% @posts.each do |post| %>
      <hr>
-        <div class="user_name"> <%= link_to post.auther, users_path(post.user_id) %> </div>
+        <div class="user_name"> 
+          <% if user_signed_in? && post.user_id == current_user.id %>
+            <strong> <%= link_to post.auther, mypage_path %> </strong>
+          <% else %>
+            <strong> <%= link_to post.auther, users_path(post.user_id) %> </strong>
+          <% end %>
+        </div>
         <div class="title"> <%= post.title %> </div>
         <div class="images">
           <% if post.images.attached? %>

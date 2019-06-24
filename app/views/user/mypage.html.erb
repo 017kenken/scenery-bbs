@@ -17,7 +17,7 @@
   <div class="card card-body">
     <% @posts.each do |post| %>
      <hr>
-        <div class="user_name"> <%= link_to post.auther, users_path(post.user_id) %> </div>
+        <div class="user_name"> <strong> <%=  post.auther %> </strong> </div>
         <div class="title"> <%= post.title %> </div>
         <div class="images">
           <% if post.images.attached? %>
@@ -49,7 +49,13 @@
   <div class="card card-body">
     <% @likes.each do |like| %>
      <hr>
-        <div class="user_name"> <%= link_to like.auther, users_path(like.user_id) %> </div>
+        <div class="user_name"> 
+          <% if user_signed_in? && like.user_id == current_user.id %>
+            <strong> <%= link_to like.auther, mypage_path %> </strong>
+          <% else %>
+            <strong> <%= link_to like.auther, users_path(like.user_id) %> </strong>
+          <% end %>
+        </div>
         <div class="title"> <%= like.title %> </div>
         <div class="images">
           <% if like.images.attached? %>
