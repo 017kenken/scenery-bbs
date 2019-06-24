@@ -19,6 +19,7 @@ class UserController < ApplicationController
 
   def mypage
     @user = current_user
+    @likes = @user.likees(Post)
     @posts = current_user.posts.where(params[:user_id])
     @followees = @user.followees(User)
     @followers = @user.followers(User)
