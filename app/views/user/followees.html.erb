@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <h1>フォロー</h1>
 <hr>
-<div>
+<div class="follow_list">
 <% @followees.each do |followees| %>
   <div class="follow_user">
     <% if user_signed_in? && followees.id == current_user.id %>
@@ -9,17 +9,19 @@
     <% else %>
       <strong> <%= link_to followees.name, users_path(followees.id) %> </strong>
     <% end %>
+
+    <div class="follow_btn">
+      <% if user_signed_in? && followees.id != current_user.id %>
+        <% if current_user.follows?(followees)%>
+          <button type="button" class="btn btn-primary rounded-pill"><%= link_to 'フォロー中', follow_user_path(followees.id), method: :post %></button>
+        <% else %>
+          <button type="button" class="btn btn-outline-primary rounded-pill"><%= link_to 'フォローする', follow_user_path(followees.id), method: :post %></button>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="follow_btn">
-    <% if user_signed_in? && followees.id != current_user.id %>
-      <% if current_user.follows?(followees)%>
-        <button type="button" class="btn btn-primary rounded-pill"><%= link_to 'フォロー中', follow_user_path(followees.id), method: :post %></button>
-      <% else %>
-        <button type="button" class="btn btn-outline-primary rounded-pill"><%= link_to 'フォローする', follow_user_path(followees.id), method: :post %></button>
-      <% end %>
-    <% end %>
-  </div>
+  
 
   <div class="profile">
    <%= sanitize followees.profile, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %>

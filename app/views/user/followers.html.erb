@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <h1>フォロワー</h1>
 <hr>
-<div>
+<div class="follow_list">
 <% @followers.each do |followers| %>
   <div class="follow_user">
     <% if user_signed_in? && followers.id == current_user.id %>
@@ -9,16 +9,16 @@
     <% else %>
       <strong> <%= link_to followers.name, users_path(followers.id) %> </strong>
     <% end %>
-  </div>
 
-  <div class="follow_btn">
-    <% if user_signed_in? && followers.id != current_user.id %>
-      <% if current_user.follows?(followers)%>
-        <button type="button" class="btn btn-primary rounded-pill"><%= link_to 'フォロー中', follow_user_path(followers.id), method: :post %></button>
-      <% else %>
-        <button type="button" class="btn btn-outline-primary rounded-pill"><%= link_to 'フォローする', follow_user_path(followers.id), method: :post %></button>
+    <div class="follow_btn">
+      <% if user_signed_in? && followers.id != current_user.id %>
+        <% if current_user.follows?(followers)%>
+          <button type="button" class="btn btn-primary rounded-pill"><%= link_to 'フォロー中', follow_user_path(followers.id), method: :post %></button>
+        <% else %>
+          <button type="button" class="btn btn-outline-primary rounded-pill"><%= link_to 'フォローする', follow_user_path(followers.id), method: :post %></button>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 
   <div class="profile">

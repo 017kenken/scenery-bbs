@@ -1,17 +1,21 @@
 <p id="notice"><%= notice %></p>
-<h1><%=@user.name%></h1>
-<div><%=@followees.count%> <%= link_to 'フォロー', followees_path(@user)%> <%=@followers.count%> <%= link_to 'フォロワー', followers_path(@user) %></div>
-<p><%= sanitize @user.profile, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %></p>
-<%= link_to 'プロフィール編集', users_edit_path%>
+
+<div class="my_name">
+   <%=@user.name%> 
+  <div class="edit_btn"> <button type="button" class="btn btn-outline-primary rounded-pill"><%= link_to 'プロフィール編集', users_edit_path%></button> </div>
+</div>
+<div class="profile"> <%= sanitize @user.profile, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %> </div>
+<div><%=@followees.count%> <%= link_to 'フォロー', followees_path(@user)%> <%=@followers.count%> <%= link_to 'フォロワー', followers_path(@user) %> </div>
+
  <!--投稿一覧-->
- <p>
+<div class="list_btn">
   <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     投稿一覧
   </button>
   <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseyoki" aria-expanded="false" aria-controls="collapseyoki">
     よき！
   </button>
-</p>
+</div>
 
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
