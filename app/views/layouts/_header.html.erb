@@ -1,8 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <%= link_to "BBS", root_path, class: "navbar-brand" %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <%= link_to "SBS", root_path, class: "navbar-brand" %>
   <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Menu
@@ -10,6 +7,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <%= link_to 'Top', posts_path, class: "dropdown-item" %>
     <% if user_signed_in? %>
+    <%= link_to 'New Post', new_post_path, class: "dropdown-item" %>
     <%= link_to 'My Page', mypage_path, class: "dropdown-item" %>
     <%= link_to 'Sign Out', destroy_user_session_path, class: "dropdown-item", method: :delete %>
     <% else %>

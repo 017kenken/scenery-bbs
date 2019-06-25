@@ -21,7 +21,7 @@
         <div class="title"> <%= post.title %> </div>
         <div class="images">
           <% if post.images.attached? %>
-           <%= image_tag post.images.first, :size => '500x420'%> <br>
+           <%= image_tag post.images.first, :class =>"d-block w-100"%> <br>
           <% end %>
         </div>
         <div class="content"> <%= sanitize post.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %> </div>
@@ -59,7 +59,7 @@
         <div class="title"> <%= like.title %> </div>
         <div class="images">
           <% if like.images.attached? %>
-           <%= image_tag like.images.first, :size => '500x420'%> <br>
+           <%= image_tag like.images.first, :class =>"d-block w-100"%> <br>
           <% end %>
         </div>
         <div class="content"> <%= sanitize like.content, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %> </div>
