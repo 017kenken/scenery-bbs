@@ -27,14 +27,14 @@
           <%= link_to 'Show', post %>
             <% if user_signed_in? %>
               <% if current_user.likes?(post)%>
-              <%= link_to '✨', likes_path(post) %><%=post.likers(User).count%>
+              | <%= link_to '✨', likes_path(post) %><%=post.likers(User).count%>
               <% else %>
-              <%= link_to '☆', likes_path(post) %><%=post.likers(User).count%>
+              | <%= link_to '☆', likes_path(post) %><%=post.likers(User).count%>
               <% end %>
 
               <% if user_signed_in? && post.user_id == current_user.id %>
-              <%= link_to 'Edit', edit_post_path(post) %>
-              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+              | <%= link_to 'Edit', edit_post_path(post) %>
+              | <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
               <% end %>
             <% end %>
         </div>

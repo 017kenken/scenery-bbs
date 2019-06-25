@@ -1,9 +1,15 @@
 <p id="notice"><%= notice %></p>
 <h1><%= @user.name%></h1>
 
-<div><%= link_to 'フォロー', follow_user_path(@user), method: :post %></div>
+<div class ="follow_btn">
+<% if current_user.follows?(@user)%>
+  <button type="button" class="btn btn-primary rounded-pill"><%= link_to 'フォロー中', follow_user_path(@user), method: :post %></button>
+<% else %>
+  <button type="button" class="btn btn-outline-primary rounded-pill"><%= link_to 'フォローする', follow_user_path(@user), method: :post %></button>
+<% end %>
+</div>
 
-<div><%= link_to 'フォロー', followees_path%><%=@user.followees(User).count%> <%= link_to 'フォロワー', followers_path %><%=@user.followers(User).count%></div>
+<div><%=@user.followees(User).count%><%= link_to 'フォロー', followees_path%> <%=@user.followers(User).count%><%= link_to 'フォロワー', followers_path %></div>
 <p>
 <%= sanitize @user.profile, tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %>
 </p>
@@ -23,14 +29,14 @@
           <%= link_to 'Show', post %>
             <% if user_signed_in? %>
               <% if current_user.likes?(post)%>
-              <%= link_to '✨', likes_path(post) %><%=post.likers(User).count%>
+              | <%= link_to '✨', likes_path(post) %><%=post.likers(User).count%> 
               <% else %>
-              <%= link_to '☆', likes_path(post) %><%=post.likers(User).count%>
+              | <%= link_to '☆', likes_path(post) %><%=post.likers(User).count%> 
               <% end %>
 
               <% if user_signed_in? && post.user_id == current_user.id %>
-              <%= link_to 'Edit', edit_post_path(post) %>
-              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+              | <%= link_to 'Edit', edit_post_path(post) %> 
+              | <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
               <% end %>
             <% end %>
         </div>
